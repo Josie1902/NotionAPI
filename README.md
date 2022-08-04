@@ -6,8 +6,8 @@ Simple to use functions to implement Notion API into your automation projects
 
 ## Setting up
 
-Follow this to make your bot:
-https://developers.notion.com/docs/getting-started
+Set up your bot:
+[Notion API Getting Started](https://pages.github.com/)
 
 Install these modules
 
@@ -19,13 +19,13 @@ Make an .env file to store your NOTION_API_TOKEN and IDs
 
 Example:
 
-"""
+```
 
 MY_NOTION_TOKEN = "Input bot token"
 
 DATABASE_ID = "Input database id"
 
-"""
+```
 
 # Notes
 
@@ -39,7 +39,7 @@ You will be using these 3 modules often:
 
 ## Create a Page
 
-"""
+```
 database_id = ""
 
 headers = {
@@ -49,8 +49,8 @@ headers = {
     "Content-Type": "application/json",
 
     "Notion-Version": "2022-06-28",
-
 }
+
 
 property_field = {"Name": Title, "Status": Status, "Genre": Genre, "Program": Movie, "Review": Review,}
 
@@ -65,14 +65,14 @@ overall_review = block.paragraph("Overall Review", color="gray_background")
 content = notion.content_format(colomn_list, overall_review)
 
 notion.create_page(
-database_id, headers, property_field, content, page_cover, page_emoji,
+    database_id, headers, property_field, content, page_cover, page_emoji,
 )
 
-"""
+```
 
 ## Append Children Blocks
 
-"""
+```
 text = block.paragraph("I am a child", "red")
 
 quote = block.quote("An extra quote child")
@@ -81,7 +81,7 @@ append_children = notion.content_format(text, quote)
 
 notion.append_blocks(block_id, headers, append_children)
 
-"""
+```
 
 # Project
 
