@@ -275,51 +275,6 @@ def get_page_children(page_id, headers):
 
 
 def get_page_content(page_id, headers):
-    """ - REDACTED: Get name of blocks, its contents, id, parent_id and check whether they have children -
-
-    Args:
-        page_id (str): Id from Notion page (can be found in url)
-        headers (dict): Permissions to Notion API
-    
-    See Also:
-        get_page_content_threads: Same function but uses threading
-    """
-    response_data = get_page_children(page_id, headers)
-
-    results = response_data["results"]
-
-    block_list = recursive.recursive_blocks(results, headers)
-
-    id_list = recursive.recursive_id(results, headers)
-
-    has_children_list = recursive.recursive_has_children(results, headers)
-
-    content_list = recursive.recursive_content(results, headers)
-
-    parent_list = recursive.recursive_parent_id(results, headers)
-
-    # Check list contents
-    # print(block_list)
-    # print(id_list)
-    # print(has_children_list)
-    # print(content_list)
-    # print(parent_list)
-
-    # Create pandas dataframe
-    data = {
-        "Block": block_list,
-        "Id": id_list,
-        "Content": content_list,
-        "Has_children?": has_children_list,
-        "Parent_id": parent_list,
-    }
-    pd.set_option("display.max_columns", 5)
-    df = pd.DataFrame(data)
-    print(f"--- You are viewing content of page: {page_id} ---")
-    print(df)
-
-
-def get_page_content_threads(page_id, headers):
     """Get name of blocks, its contents, id, parent_id and check whether they have children
 
     Args:

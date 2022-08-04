@@ -98,5 +98,5 @@ notion.create_page(
 # notion.get_page_info_from_database(database_id, headers)
 
 # Dataframe of block info from current page
-# notion.get_page_content_threads("6540eb7151044bbc9023733108468dab", headers)
+# notion.get_page_content("page_id", headers)
 
