@@ -1,6 +1,6 @@
 # NotionAPI
 
-Simple to use functions to implement Notion API into your automation projects
+Simple functions to implement Notion API into your automation projects
 
 # Usage
 
