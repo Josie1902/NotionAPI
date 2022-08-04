@@ -6,34 +6,34 @@ Simple to use functions to implement Notion API into your automation projects
 
 ## Setting up
 
-Set up your bot:
-[Notion API Getting Started](https://pages.github.com/)
+1. Set up your bot:
+   [Notion API Getting Started](https://pages.github.com/)
 
-Install these modules
+2. Install these modules
 
-> pip install beautifulsoup4
+   > pip install beautifulsoup4
 
-> pip install requests
+   > pip install requests
 
-Make an .env file to store your NOTION_API_TOKEN and IDs
+3. Make an .env file to store your NOTION_API_TOKEN and IDs
 
-Example:
+   Example:
 
-```
+   ```
 
-MY_NOTION_TOKEN = "Input bot token"
+   MY_NOTION_TOKEN = "Input bot token"
 
-DATABASE_ID = "Input database id"
+   DATABASE_ID = "Input database id"
 
-```
+   ```
 
 # Notes
 
-You will be using these 3 modules often:
+Modules Available:
 
 1. block: Input blocks into a page
 2. property: Deals with notion property field
-3. notion: Get, patch or delete or update databases, pages or blocks
+3. notion: Get, patch, delete or update databases, pages and blocks
 
 # Examples
 
