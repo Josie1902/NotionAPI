@@ -7,7 +7,7 @@ Simple functions to implement Notion API into your automation projects
 ## Setting up
 
 1. Set up your bot:
-   [Notion API Getting Started](https://pages.github.com/)
+   [Notion API Getting Started](https://developers.notion.com/docs/getting-started)
 
 2. Install modules
 
