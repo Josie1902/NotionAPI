@@ -47,6 +47,8 @@ Genre = property.multi_select("Anime", "Friendship", "School")
 Movie = property.select("Movie")
 Review = property.select("Review Ongoing")
 
+# Nothing needs to be changed unless otherwise from this point
+
 # Load secrets
 load_dotenv()
 
