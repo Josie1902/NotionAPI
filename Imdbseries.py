@@ -15,26 +15,24 @@ import requests
 # Import python modules
 from concurrent.futures import ThreadPoolExecutor
 
-# TO UPDATE: Web scrape HBO
-res = requests.get("https://www.hbo.com/chernobyl/season-1")
+# TO UPDATE: Web scrape series from Imdb
+res = requests.get("https://www.imdb.com/title/tt10332508/episodes?season=1")
 
 # Check for errors getting URL
 # print(res.raise_for_status())
 
 soup = bs4.BeautifulSoup(res.text, "html.parser")
 
-# TO UPDATE: Emoji and series poster
-HBO_page_cover = "https://play-lh.googleusercontent.com/ELLR6rcIP_mr6pB4kX9QhBKF-najkWHfb8RqceX4CBsyel3o_W9DoGas7WfPgfiIsQ"
-page_emoji = "☢️"
-series_poster = (
-    "https://i.pinimg.com/originals/9a/23/83/9a2383b8f04594a392ff5244e7b0ce28.jpg"
-)
-series_title = soup.find("h1", {"class": "text-left"}).get_text()
+# TO UPDATE: network page cover, emoji and series poster
+network_page_cover = "https://variety.com/wp-content/uploads/2014/02/adult-swim1.jpg?crop=178px%2C100px%2C666px%2C371px&resize=681%2C383"
+page_emoji = "🍖"
+series_poster = "https://m.media-amazon.com/images/M/MV5BODAxNGFhMTEtYWMzYy00NTlkLTk4OGUtMDk2Y2ZjMzhjNzBiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+series_title = soup.find("div", {"class": "parent"}).find("a").get_text()
 
 # TO UPDATE: Property headers for Notion Page
 Title = property.title(series_title)
 Status = property.select("Not started")
-Genre = property.multi_select("Thriller", "Drama")
+Genre = property.multi_select("Animation", "Thriller", "Action")
 Series = property.select("Series")
 Review = property.select("Review Ongoing")
 
@@ -49,21 +47,21 @@ image_list = []
 
 
 def get_descriptions():
-    descriptions = soup.find_all("p", {"class": "episode_description"})
+    descriptions = soup.find_all(class_="item_description")
     for description in descriptions:
         description_text = description.get_text().strip()
         description_list.append(description_text)
 
 
 def get_titles():
-    titles = soup.find_all("h6", {"class": "episode_title"})
-    for title in titles:
-        title_text = title.get_text()
-        title_list.append(title_text)
+    air_dates = soup.find_all(class_="airdate")
+    for air_date in air_dates:
+        title = air_date.find_next_sibling("strong").get_text()
+        title_list.append(title)
 
 
 def get_episode_images():
-    images = soup.find_all("img", {"class": "episode_image"})
+    images = soup.find_all("img", {"class": "zero-z-index"})
     for image in images:
         link = image["src"]
         image_list.append(link)
@@ -158,7 +156,7 @@ overall_review = block.paragraph("Overall Review", color="gray_background")
 content = notion.content_format(colomn_list, overall_review)
 
 notion.create_page(
-    database_id, headers, property_field, content, HBO_page_cover, page_emoji,
+    database_id, headers, property_field, content, network_page_cover, page_emoji,
 )
 
 # More Info

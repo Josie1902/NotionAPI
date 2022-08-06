@@ -14,34 +14,34 @@ import requests
 
 # Web scrapping component
 
-# TO UPDATE: Web scrape HBO movie
-res = requests.get("https://www.hbo.com/movies/last-night-in-soho")
+# TO UPDATE: Web scrape movie from Imdb
+res = requests.get("https://www.imdb.com/title/tt1211837/")
 
 # Check for errors getting URL
 # print(res.raise_for_status())
 
 soup = bs4.BeautifulSoup(res.text, "html.parser")
 
-movie_title = soup.find("section", {"class": "hero-text"}).get_text()
+movie_title = soup.find(class_="sc-b73cd867-0").get_text()
 
-description = soup.find("p", {"class": "text-left"}).get_text().strip()
+description = soup.find(class_="sc-16ede01-2").get_text().strip()
 
 # Check whether content was added
 # print(movie_title)
 # print(description)
 
-# TO UPDATE: Movie poster and page emoji
+# TO UPDATE: Movie poster, network page cover and page emoji
 
-movie_poster = "https://m.media-amazon.com/images/M/MV5BZjgwZDIwY2MtNGZlNy00NGRlLWFmNTgtOTBkZThjMDUwMGJhXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_.jpg"
+movie_poster = "https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_.jpg"
 
-HBO_page_cover = "https://play-lh.googleusercontent.com/ELLR6rcIP_mr6pB4kX9QhBKF-najkWHfb8RqceX4CBsyel3o_W9DoGas7WfPgfiIsQ"
+network_page_cover = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/1200px-Marvel_Logo.svg.png"
 
-page_emoji = "🥂"
+page_emoji = "🪄"
 
 # TO UPDATE: Property headers for Notion Page
 Title = property.title(movie_title)
 Status = property.select("Not started")
-Genre = property.multi_select("Thriller")
+Genre = property.multi_select("Marvel", "Magic")
 Movie = property.select("Movie")
 Review = property.select("Review Ongoing")
 
@@ -90,7 +90,7 @@ content = notion.content_format(colomn_list)
 
 
 notion.create_page(
-    database_id, headers, property_field, content, HBO_page_cover, page_emoji,
+    database_id, headers, property_field, content, network_page_cover, page_emoji,
 )
 
 # More Info
