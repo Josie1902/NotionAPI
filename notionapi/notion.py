@@ -131,7 +131,7 @@ def create_page(
         display_json(res)
     else:
         print(f"{res.status_code}: Successful response!")
-        display_json(res)
+        # display_json(res)
 
 
 def update_page(page_id, headers, property_field):
