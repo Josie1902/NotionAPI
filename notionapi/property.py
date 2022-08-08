@@ -98,3 +98,16 @@ def multi_select(*names):
     multi_select_structure = {"multi_select": multi_tags}
     return multi_select_structure
 
+
+def url(url):
+    """Insert url
+
+    Args:
+        url (str): Insert url 
+
+    Returns:
+         dict: Placeholder dictionary for url to be used in "properties"
+    """
+    url_structure = {"Website": {"url": url}}
+    return url_structure
+
