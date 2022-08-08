@@ -108,6 +108,6 @@ def url(url):
     Returns:
          dict: Placeholder dictionary for url to be used in "properties"
     """
-    url_structure = {"Website": {"url": url}}
+    url_structure = {"url": url}
     return url_structure
 
